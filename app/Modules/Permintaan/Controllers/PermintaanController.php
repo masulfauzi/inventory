@@ -38,12 +38,14 @@ class PermintaanController extends Controller
 
 	public function create(Request $request)
 	{
-		$ref_status = Status::all()->pluck('status_permintaan','id');
 		$ref_users = Users::all()->pluck('name','id');
+		$ref_status = Status::all()->pluck('status_permintaan','id');
+		$ref_status->prepend('-PILIH SALAH SATU-', '');
+
 		
 		$data['forms'] = array(
-			'id_status' => ['Status', Form::select("id_status", $ref_status, null, ["class" => "form-control select2"]) ],
 			'id_user' => ['User', Form::select("id_user", $ref_users, null, ["class" => "form-control select2"]) ],
+			'id_status' => ['Status', Form::select("id_status", $ref_status, null, ["class" => "form-control select2"]) ],
 			
 		);
 
