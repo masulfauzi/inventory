@@ -38,6 +38,7 @@ class TransaksiController extends Controller
 	public function create(Request $request)
 	{
 		$ref_barang_gudang = BarangGudang::all()->pluck('id_barang','id');
+		$ref_barang_gudang->prepend('-PILIH SALAH SATU-', '');
 		
 		$data['forms'] = array(
 			'id_barang_gudang' => ['Barang Gudang', Form::select("id_barang_gudang", $ref_barang_gudang, null, ["class" => "form-control select2"]) ],
