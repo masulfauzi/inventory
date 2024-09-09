@@ -40,9 +40,10 @@ class BarangPermintaanController extends Controller
 	{
 		$ref_permintaan = Permintaan::all()->pluck('id_status','id');
 		$ref_barang_gudang = BarangGudang::all()->pluck('id_barang','id');
+		$ref_barang_gudang->prepend('-PILIH SALAH SATU-', '');
 		
 		$data['forms'] = array(
-			'id_permintaan' => ['Permintaan', Form::select("id_permintaan", $ref_permintaan, null, ["class" => "form-control select2"]) ],
+			// 'id_permintaan' => ['Permintaan', Form::select("id_permintaan", $ref_permintaan, null, ["class" => "form-control select2"]) ],
 			'id_barang_gudang' => ['Barang Gudang', Form::select("id_barang_gudang", $ref_barang_gudang, null, ["class" => "form-control select2"]) ],
 			'permintaan' => ['Permintaan', Form::text("permintaan", old("permintaan"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
 			'disetujui' => ['Disetujui', Form::text("disetujui", old("disetujui"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
