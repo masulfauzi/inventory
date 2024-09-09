@@ -20,7 +20,11 @@ class RoleTableSeeder extends Seeder
             'level' => 1
         ]);
         Role::create([
-            'role' => 'Admin',
+            'role' => 'Admin Gudang',
+            'level' => 2
+        ]);
+        Role::create([
+            'role' => 'User',
             'level' => 2
         ]);
     }
