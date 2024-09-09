@@ -46,9 +46,9 @@
                         <thead>
                             <tr>
                                 <th width="15">No</th>
+								<td>Nama Barang</td>
                                 <td>Kategori</td>
 								<td>Satuan</td>
-								<td>Nama Barang</td>
 								
                                 <th width="20%">Aksi</th>
                             </tr>
@@ -58,9 +58,9 @@
                             @forelse ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $item->id_kategori }}</td>
-									<td>{{ $item->id_satuan }}</td>
 									<td>{{ $item->nama_barang }}</td>
+                                    <td>{{ $item->kategori->kategori }}</td>
+									<td>{{ $item->satuan->satuan }}</td>
 									
                                     <td>
 										{!! button('barang.show','', $item->id) !!}

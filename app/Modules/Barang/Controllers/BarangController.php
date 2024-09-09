@@ -39,12 +39,14 @@ class BarangController extends Controller
 	public function create(Request $request)
 	{
 		$ref_kategori = Kategori::all()->pluck('kategori','id');
+		$ref_kategori->prepend('-PILIH SALAH SATU-', '');
 		$ref_satuan = Satuan::all()->pluck('satuan','id');
+		$ref_satuan->prepend('-PILIH SALAH SATU-', '');
 		
 		$data['forms'] = array(
+			'nama_barang' => ['Nama Barang', Form::text("nama_barang", old("nama_barang"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
 			'id_kategori' => ['Kategori', Form::select("id_kategori", $ref_kategori, null, ["class" => "form-control select2"]) ],
 			'id_satuan' => ['Satuan', Form::select("id_satuan", $ref_satuan, null, ["class" => "form-control select2"]) ],
-			'nama_barang' => ['Nama Barang', Form::text("nama_barang", old("nama_barang"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
 			
 		);
 
