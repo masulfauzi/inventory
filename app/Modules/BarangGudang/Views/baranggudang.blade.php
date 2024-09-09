@@ -46,8 +46,8 @@
                         <thead>
                             <tr>
                                 <th width="15">No</th>
+                                <td>Gudang</td>
                                 <td>Barang</td>
-								<td>Gudang</td>
 								<td>Stok</td>
 								
                                 <th width="20%">Aksi</th>
@@ -58,8 +58,8 @@
                             @forelse ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $item->id_gudang }}</td>
                                     <td>{{ $item->id_barang }}</td>
-									<td>{{ $item->id_gudang }}</td>
 									<td>{{ $item->stok }}</td>
 									
                                     <td>

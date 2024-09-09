@@ -38,12 +38,15 @@ class BarangGudangController extends Controller
 
 	public function create(Request $request)
 	{
-		$ref_barang = Barang::all()->pluck('created_by','id');
 		$ref_gudang = Gudang::all()->pluck('created_at','id');
+		$ref_gudang->prepend('-PILIH SALAH SATU-', '');
+		$ref_barang = Barang::all()->pluck('created_by','id');
+		$ref_barang->prepend('-PILIH SALAH SATU-', '');
+
 		
 		$data['forms'] = array(
-			'id_barang' => ['Barang', Form::select("id_barang", $ref_barang, null, ["class" => "form-control select2"]) ],
 			'id_gudang' => ['Gudang', Form::select("id_gudang", $ref_gudang, null, ["class" => "form-control select2"]) ],
+			'id_barang' => ['Barang', Form::select("id_barang", $ref_barang, null, ["class" => "form-control select2"]) ],
 			'stok' => ['Stok', Form::text("stok", old("stok"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
 			
 		);
@@ -55,15 +58,15 @@ class BarangGudangController extends Controller
 	function store(Request $request)
 	{
 		$this->validate($request, [
-			'id_barang' => 'required',
 			'id_gudang' => 'required',
+			'id_barang' => 'required',
 			'stok' => 'required',
 			
 		]);
 
 		$baranggudang = new BarangGudang();
-		$baranggudang->id_barang = $request->input("id_barang");
 		$baranggudang->id_gudang = $request->input("id_gudang");
+		$baranggudang->id_barang = $request->input("id_barang");
 		$baranggudang->stok = $request->input("stok");
 		
 		$baranggudang->created_by = Auth::id();
@@ -87,12 +90,14 @@ class BarangGudangController extends Controller
 	{
 		$data['baranggudang'] = $baranggudang;
 
-		$ref_barang = Barang::all()->pluck('created_by','id');
 		$ref_gudang = Gudang::all()->pluck('created_at','id');
+		$ref_gudang->prepend('-PILIH SALAH SATU-', '');
+		$ref_barang = Barang::all()->pluck('created_by','id');
+		$ref_barang->prepend('-PILIH SALAH SATU-', '');
 		
 		$data['forms'] = array(
-			'id_barang' => ['Barang', Form::select("id_barang", $ref_barang, null, ["class" => "form-control select2"]) ],
 			'id_gudang' => ['Gudang', Form::select("id_gudang", $ref_gudang, null, ["class" => "form-control select2"]) ],
+			'id_barang' => ['Barang', Form::select("id_barang", $ref_barang, null, ["class" => "form-control select2"]) ],
 			'stok' => ['Stok', Form::text("stok", $baranggudang->stok, ["class" => "form-control","placeholder" => "", "required" => "required", "id" => "stok"]) ],
 			
 		);
@@ -105,8 +110,8 @@ class BarangGudangController extends Controller
 	public function update(Request $request, $id)
 	{
 		$this->validate($request, [
-			'id_barang' => 'required',
 			'id_gudang' => 'required',
+			'id_barang' => 'required',
 			'stok' => 'required',
 			
 		]);
