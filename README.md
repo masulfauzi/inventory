@@ -1,3 +1,4 @@
-## Apotech
+## Inventory
 
-New apotek app by Tugutech Software Dev Studio
+Sistem Informasi Manajemen Inventory by SMK N 2 Semarang
+Support by Crocodic
