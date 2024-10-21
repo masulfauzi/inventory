@@ -8,14 +8,14 @@
     <div class="page-title">
         <div class="row mb-2">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <a href="{{ route('status.index') }}" class="btn btn-sm icon icon-left btn-outline-secondary"><i class="fa fa-arrow-left"></i> Kembali </a>
+                <a href="{{ route('usergudang.index') }}" class="btn btn-sm icon icon-left btn-outline-secondary"><i class="fa fa-arrow-left"></i> Kembali </a>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('status.index') }}">{{ $title }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $status->nama }}</li>
+                        <li class="breadcrumb-item"><a href="{{ route('usergudang.index') }}">{{ $title }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $usergudang->nama }}</li>
                     </ol>
                 </nav>
             </div>
@@ -25,14 +25,14 @@
     <section class="section">
         <div class="card">
             <h6 class="card-header">
-                Detail Data {{ $title }}: {{ $status->nama }}
+                Detail Data {{ $title }}: {{ $usergudang->nama }}
             </h6>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-10 offset-lg-2">
                         <div class="row">
-                            <div class='col-lg-2'><p>Status Permintaan</p></div><div class='col-lg-10'><p class='fw-bold'>{{ $status->status_permintaan }}</p></div>
-									<div class='col-lg-2'><p>Urutan</p></div><div class='col-lg-10'><p class='fw-bold'>{{ $status->urutan }}</p></div>
+                            <div class='col-lg-2'><p>User</p></div><div class='col-lg-10'><p class='fw-bold'>{{ $usergudang->user->id }}</p></div>
+									<div class='col-lg-2'><p>Gudang</p></div><div class='col-lg-10'><p class='fw-bold'>{{ $usergudang->gudang->id }}</p></div>
 									
                         </div>
                     </div>

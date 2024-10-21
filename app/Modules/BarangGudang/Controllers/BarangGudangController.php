@@ -38,9 +38,9 @@ class BarangGudangController extends Controller
 
 	public function create(Request $request)
 	{
-		$ref_gudang = Gudang::all()->pluck('created_at','id');
+		$ref_gudang = Gudang::all()->pluck('nama_gudang','id');
 		$ref_gudang->prepend('-PILIH SALAH SATU-', '');
-		$ref_barang = Barang::all()->pluck('created_by','id');
+		$ref_barang = Barang::all()->pluck('nama_barang','id');
 		$ref_barang->prepend('-PILIH SALAH SATU-', '');
 
 		

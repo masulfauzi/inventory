@@ -23,7 +23,7 @@ class StatusController extends Controller
 
 	public function index(Request $request)
 	{
-		$query = Status::query();
+		$query = Status::query()->orderBy('urutan');
 		if($request->has('search')){
 			$search = $request->get('search');
 			// $query->where('name', 'like', "%$search%");
@@ -39,6 +39,7 @@ class StatusController extends Controller
 		
 		$data['forms'] = array(
 			'status_permintaan' => ['Status Permintaan', Form::text("status_permintaan", old("status_permintaan"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
+			'urutan' => ['Urutan', Form::text("urutan", old("urutan"), ["class" => "form-control","placeholder" => "n", "required" => "required"]) ],
 			
 		);
 
@@ -50,11 +51,13 @@ class StatusController extends Controller
 	{
 		$this->validate($request, [
 			'status_permintaan' => 'required',
+			'urutan' => 'required',
 			
 		]);
 
 		$status = new Status();
 		$status->status_permintaan = $request->input("status_permintaan");
+		$status->urutan = $request->input("urutan");
 		
 		$status->created_by = Auth::id();
 		$status->save();
@@ -80,6 +83,7 @@ class StatusController extends Controller
 		
 		$data['forms'] = array(
 			'status_permintaan' => ['Status Permintaan', Form::text("status_permintaan", $status->status_permintaan, ["class" => "form-control","placeholder" => "", "required" => "required", "id" => "status_permintaan"]) ],
+			'urutan' => ['Urutan', Form::text("urutan", $status->urutan, ["class" => "form-control","placeholder" => "n", "required" => "required", "id" => "urutan"]) ],
 			
 		);
 
@@ -92,11 +96,13 @@ class StatusController extends Controller
 	{
 		$this->validate($request, [
 			'status_permintaan' => 'required',
+			'urutan' => 'required',
 			
 		]);
 		
 		$status = Status::find($id);
 		$status->status_permintaan = $request->input("status_permintaan");
+		$status->urutan = $request->input("urutan");
 		
 		$status->updated_by = Auth::id();
 		$status->save();

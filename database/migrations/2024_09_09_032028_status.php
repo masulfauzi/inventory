@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('status', function (Blueprint $table) {
             $table->string('id', 36)->primary();
             $table->string('status_permintaan');
+            $table->integer('urutan')->unique();
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by', 36)->nullable();

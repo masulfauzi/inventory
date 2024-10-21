@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Modules\Role\Models\Role;
 use App\Modules\Users\Models\Users;
 use App\Http\Controllers\Controller;
+use App\Modules\Gudang\Models\Gudang;
 use App\Modules\UserRole\Models\UserRole;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,12 +29,16 @@ class UsersController extends Controller
 	public function create()
 	{
 		$roles = Role::all()->pluck('role', 'id');
+		$gudang = Gudang::all()->pluck('nama_gudang', 'id');
+		// die($gudang);
+		$gudang->prepend('-PILIH SALAH SATU-','');
 		$data['forms'] = array(
 			'name' => ['Name', Form::text("name", old('name'), ["class" => "form-control","placeholder" => "", "required" => "required"])],
 			'username' => ['Username', Form::text("username", old('username'), ["class" => "form-control","placeholder" => "", "required" => "required"])],
 			'email' => ['Email', Form::text("email", old('email'), ["class" => "form-control","placeholder" => "", "required" => "required"])],
 			'password' => ['Password', Form::password("password", ["class" => "form-control","placeholder" => "", "required" => "required"])],
-			'identitas' => ['Kode Identitas', Form::text("identitas", old('identitas'), ["class" => "form-control", "placeholder" => "NIM,NIP,NRP,NIK,dll", "required" => "required"])],
+			'no_hp' => ['No HP', Form::text("no_hp", old('no_hp'), ["class" => "form-control","placeholder" => "Contoh:628512345678", "required" => "required"])],
+			'id_gudang' => ['Pilih Gudang', Form::select("id_gudang", $gudang, null,["class" => "form-control select2", "required" => "required"])],
 			'roles' => ['Role', Form::select("roles[]", $roles, null, ["class" => "form-control multi-select2","placeholder" => "", "required" => "required"])],
 		);
 		return view('Users::form_create', array_merge($data, ['title' => $this->title]));
@@ -46,7 +51,7 @@ class UsersController extends Controller
 			'username' => 'required|unique:users,username',
 			'email' => 'required|email',
 			'password' => 'required',
-			'identitas' => 'required|unique:users,identitas',
+			'no_hp' => 'required',
 			'roles' => 'required|array',
 		]);
 

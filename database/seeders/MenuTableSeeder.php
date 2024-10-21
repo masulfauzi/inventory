@@ -45,6 +45,16 @@ class MenuTableSeeder extends Seeder
             'parent_id' => '-',
             'level' => 0
         ]);
+        $ref = Menu::create([
+            'menu' => 'Referensi',
+            'module' => 'no',
+            'routing' => 'no',
+            'is_tampil' => 1,
+            'icon' => 'fa-folder',
+            'urutan' => 4,
+            'parent_id' => '-',
+            'level' => 0
+        ]);
         Menu::create([
             'menu' => 'Dashboard',
             'module' => 'dashboard',
@@ -52,6 +62,16 @@ class MenuTableSeeder extends Seeder
             'is_tampil' => 1,
             'icon' => 'fa-tachometer-alt',
             'urutan' => 1,
+            'parent_id' => $main->id,
+            'level' => 1
+        ]);
+        Menu::create([
+            'menu' => 'Master Barang',
+            'module' => 'barang',
+            'routing' => 'barang.index',
+            'is_tampil' => 1,
+            'icon' => 'fa-folder',
+            'urutan' => 2,
             'parent_id' => $main->id,
             'level' => 1
         ]);
@@ -135,6 +155,46 @@ class MenuTableSeeder extends Seeder
             'icon' => 'fa-wave-square',
             'urutan' => 6,
             'parent_id' => $dev->id,
+            'level' => 1
+        ]);
+        Menu::create([
+            'menu' => 'Satuan',
+            'module' => 'satuan',
+            'routing' => 'satuan.index',
+            'is_tampil' => 1,
+            'icon' => 'fa-folder',
+            'urutan' => 1,
+            'parent_id' => $ref->id,
+            'level' => 1
+        ]);
+        Menu::create([
+            'menu' => 'Gudang',
+            'module' => 'gudang',
+            'routing' => 'gudang.index',
+            'is_tampil' => 1,
+            'icon' => 'fa-folder',
+            'urutan' => 1,
+            'parent_id' => $ref->id,
+            'level' => 1
+        ]);
+        Menu::create([
+            'menu' => 'Status',
+            'module' => 'status',
+            'routing' => 'status.index',
+            'is_tampil' => 1,
+            'icon' => 'fa-folder',
+            'urutan' => 1,
+            'parent_id' => $ref->id,
+            'level' => 1
+        ]);
+        Menu::create([
+            'menu' => 'Kategori',
+            'module' => 'kategori',
+            'routing' => 'kategori.index',
+            'is_tampil' => 1,
+            'icon' => 'fa-folder',
+            'urutan' => 1,
+            'parent_id' => $ref->id,
             'level' => 1
         ]);
 

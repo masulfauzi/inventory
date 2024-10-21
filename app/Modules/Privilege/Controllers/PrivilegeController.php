@@ -69,6 +69,7 @@ class PrivilegeController extends Controller
 		$privilege->id_role = $request->input("id_role");
 		$privilege->read = $request->input("read");
 		$privilege->show_menu = $request->input("show_menu");
+		$privilege->show = $request->input("show");
 		$privilege->update = $request->input("update");
 		$privilege->created_by = Auth::id();
 		$privilege->save();

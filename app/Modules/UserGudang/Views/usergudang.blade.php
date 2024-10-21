@@ -29,7 +29,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-9">
-                        <form action="{{ route('baranggudang.index') }}" method="get">
+                        <form action="{{ route('usergudang.index') }}" method="get">
                             <div class="form-group col-md-3 has-icon-left position-relative">
                                 <input type="text" class="form-control" value="{{ request()->get('search') }}" name="search" placeholder="Search">
                                 <div class="form-control-icon"><i class="fa fa-search"></i></div>
@@ -37,7 +37,7 @@
                         </form>
                     </div>
                     <div class="col-3">  
-						{!! button('baranggudang.create', $title) !!}  
+						{!! button('usergudang.create', $title) !!}  
                     </div>
                 </div>
                 @include('include.flash')
@@ -46,9 +46,8 @@
                         <thead>
                             <tr>
                                 <th width="15">No</th>
-                                <td>Gudang</td>
-                                <td>Barang</td>
-								<td>Stok</td>
+                                <td>User</td>
+								<td>Gudang</td>
 								
                                 <th width="20%">Aksi</th>
                             </tr>
@@ -58,19 +57,18 @@
                             @forelse ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $item->gudang->nama_gudang }}</td>
-                                    <td>{{ $item->barang->nama_barang }}</td>
-									<td>{{ $item->stok }}</td>
+                                    <td>{{ $item->id_user }}</td>
+									<td>{{ $item->id_gudang }}</td>
 									
                                     <td>
-										{!! button('baranggudang.show','', $item->id) !!}
-										{!! button('baranggudang.edit', $title, $item->id) !!}
-                                        {!! button('baranggudang.destroy', $title, $item->id) !!}
+										{!! button('usergudang.show','', $item->id) !!}
+										{!! button('usergudang.edit', $title, $item->id) !!}
+                                        {!! button('usergudang.destroy', $title, $item->id) !!}
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center"><i>No data.</i></td>
+                                    <td colspan="4" class="text-center"><i>No data.</i></td>
                                 </tr>
                             @endforelse
                         </tbody>
