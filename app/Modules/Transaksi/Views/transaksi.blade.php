@@ -27,7 +27,7 @@
                 Tabel Data {{ $title }}
             </h6>
             <div class="card-body">
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-9">
                         <form action="{{ route('transaksi.index') }}" method="get">
                             <div class="form-group col-md-3 has-icon-left position-relative">
@@ -39,7 +39,7 @@
                     <div class="col-3">  
 						{!! button('transaksi.create', $title) !!}  
                     </div>
-                </div>
+                </div> --}}
                 @include('include.flash')
                 <div class="table-responsive-md col-12">
                     <table class="table" id="table1">
@@ -50,7 +50,7 @@
 								<td>Masuk</td>
 								<td>Keluar</td>
 								<td>Tgl Transaksi</td>
-								<td>Bukti Transaksi</td>
+								{{-- <td>Bukti Transaksi</td> --}}
 								
                                 <th width="20%">Aksi</th>
                             </tr>
@@ -60,11 +60,11 @@
                             @forelse ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $item->id_barang_gudang }}</td>
+                                    <td>{{ $item->barangGudang->barang->nama_barang }}</td>
 									<td>{{ $item->masuk }}</td>
 									<td>{{ $item->keluar }}</td>
 									<td>{{ $item->tgl_transaksi }}</td>
-									<td>{{ $item->bukti_transaksi }}</td>
+									{{-- <td>{{ $item->bukti_transaksi }}</td> --}}
 									
                                     <td>
 										{!! button('transaksi.show','', $item->id) !!}

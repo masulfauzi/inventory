@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/role/set/{id_role}', [DashboardController::class,'changeRole'])->name('dashboard.change.role');
+    Route::get('/role/set_gudang/{id_gudang}', [DashboardController::class,'change_gudang'])->name('dashboard.change.gudang');
     Route::get('/forcelogout', [DashboardController::class,'forceLogout'])->name('dashboard.force.logout');
 });
 

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MenuTableSeeder::class);
         $this->call(PrivilegeTableSeeder::class);
         $this->call(StatusSeeder::class);
+        $this->call(GudangSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -45,7 +45,7 @@ class BarangGudangController extends Controller
 
 		
 		$data['forms'] = array(
-			'id_gudang' => ['Gudang', Form::select("id_gudang", $ref_gudang, null, ["class" => "form-control select2"]) ],
+			'id_gudang' => ['', Form::hidden("id_gudang", session('active_gudang')['id']) ],
 			'id_barang' => ['Barang', Form::select("id_barang", $ref_barang, null, ["class" => "form-control select2"]) ],
 			'stok' => ['Stok', Form::text("stok", old("stok"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
 			

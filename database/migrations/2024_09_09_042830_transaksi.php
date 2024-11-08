@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('id', 36)->primary();
             $table->string('id_barang_gudang', 36);
             $table->foreign('id_barang_gudang')->references('id')->on('barang_gudang')->onUpdate('cascade')->onDelete('restrict');
-            $table->integer('masuk');
-            $table->integer('keluar');
+            $table->integer('masuk')->nullable();
+            $table->integer('keluar')->nullable();
             $table->date('tgl_transaksi');
-            $table->string('bukti_transaksi');
+            $table->string('bukti_transaksi')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by', 36)->nullable();

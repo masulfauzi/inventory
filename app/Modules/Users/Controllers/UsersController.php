@@ -7,6 +7,7 @@ use App\Modules\Role\Models\Role;
 use App\Modules\Users\Models\Users;
 use App\Http\Controllers\Controller;
 use App\Modules\Gudang\Models\Gudang;
+use App\Modules\UserGudang\Models\UserGudang;
 use App\Modules\UserRole\Models\UserRole;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,6 +53,7 @@ class UsersController extends Controller
 			'email' => 'required|email',
 			'password' => 'required',
 			'no_hp' => 'required',
+			'id_gudang' => 'required',
 			'roles' => 'required|array',
 		]);
 
@@ -63,6 +65,12 @@ class UsersController extends Controller
 		$users->identitas = $request->input("identitas");
 		$users->created_by = Auth::id();
 		$users->save();
+
+		$user_gudang = new UserGudang();
+		$user_gudang->id_user = $users->id;
+		$user_gudang->id_gudang = $request->input("id_gudang");
+		$user_gudang->created_by = Auth::id();
+		$user_gudang->save();
 
 		foreach ($request->get('roles') as $key => $value) {
 			$ur = new UserRole();
@@ -80,12 +88,15 @@ class UsersController extends Controller
 		$selected_roles = UserRole::where('id_user', $user->id)->get()->pluck('id_role');
 		$data['selecteds'] = $selected_roles;
 		$data['user'] = $user;
+		$gudang = Gudang::all()->pluck('nama_gudang', 'id');
+
+
 		$data['forms'] = array(
 			'name' => ['Name', Form::text("name", $user->name, ["class" => "form-control","placeholder" => "", "required" => "required"])],
 			'username' => ['Username', Form::text("username", $user->username, ["class" => "form-control","placeholder" => "", "required" => "required"])],
 			'email' => ['Email', Form::text("email", $user->email, ["class" => "form-control","placeholder" => "", "required" => "required"])],
 			'password' => ['Password', Form::password("password", ["class" => "form-control","placeholder" => "Kosongkan jika tidak ingin mengubah"])],
-			'identitas' => ['Kode Identitas', Form::text("identitas", $user->identitas, ["class" => "form-control","placeholder" => ""])],
+			'id_gudang' => ['Pilih Gudang', Form::select("id_gudang", $gudang, null,["class" => "form-control select2", "required" => "required"])],
 			'roles' => ['Role', Form::select("roles[]", $roles, $selected_roles, ["class" => "form-control multi-select2","placeholder" => "", "required" => "required"])],
 		);
 
@@ -99,7 +110,7 @@ class UsersController extends Controller
 			'email' => 'required|email',
 			'password' => 'nullable',
 			'username' => 'required',
-			'identitas' => 'nullable',
+			'id_gudang' => 'required',
 			'roles' => 'required|array',
 		);
 		$this->validate($request, $validation);
@@ -122,6 +133,11 @@ class UsersController extends Controller
 			$ur->deleted_at = NULL;
 			$ur->save();
 		}
+
+		$user_gudang = UserGudang::where('id_user', $users->id)->first();
+		$user_gudang->id_gudang = $request->input("id_gudang");
+		$user_gudang->updated_by = Auth::id();
+		$user_gudang->save();
 
 		return redirect()->route('users.index')->with('message_success', 'User berhasil diubah!');
 	}

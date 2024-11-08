@@ -47,7 +47,7 @@
                             <tr>
                                 <th width="15">No</th>
                                 <td>Status</td>
-								<td>Tanggal Permintaan</td>
+								<td>User</td>
 								
                                 <th width="20%">Aksi</th>
                             </tr>
@@ -58,12 +58,14 @@
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $item->status->status_permintaan }}</td>
-									<td>{{ \App\Helpers\Format::tanggal($item->created_at, false,false) }}</td>
+									<td>{{ $item->users->name }}</td>
 									
                                     <td>
-										{!! button('permintaan.show','', $item->id) !!}
+										{{-- {!! button('permintaan.show','', $item->id) !!}
 										{!! button('permintaan.edit', $title, $item->id) !!}
-                                        {!! button('permintaan.destroy', $title, $item->id) !!}
+                                        {!! button('permintaan.destroy', $title, $item->id) !!} --}}
+
+                                        <a href="{{ route('permintaan.show', $item->id) }}" class="btn btn-sm btn-outline-primary">Detail</a>
                                     </td>
                                 </tr>
                             @empty

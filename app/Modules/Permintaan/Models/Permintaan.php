@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Status\Models\Status;
-use App\Modules\User\Models\User;
+use App\Modules\Users\Models\Users;
 
 
 class Permintaan extends Model
@@ -22,8 +22,8 @@ class Permintaan extends Model
 	public function status(){
 		return $this->belongsTo(Status::class,"id_status","id");
 	}
-public function user(){
-		return $this->belongsTo(User::class,"id_user","id");
+public function users(){
+		return $this->belongsTo(Users::class,"id_user","id");
 	}
 
 }

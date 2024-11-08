@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Permission;
+use App\Modules\Gudang\Models\Gudang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,7 @@ class DashboardController extends Controller
         // get user's privilege
         $privileges = Permission::getPrivilege($active_role);
         $privileges = $privileges->mapWithKeys(function ($item, $key) {
-                            return [$item['module'] => $item->only(['create', 'read', 'update', 'delete', 'show_menu'])];
+                            return [$item['module'] => $item->only(['create', 'read', 'update', 'delete', 'show_menu', 'show'])];
                         });
 
         // store to session
@@ -38,6 +39,16 @@ class DashboardController extends Controller
         session(['active_role' => $active_role]);
 
         return redirect()->route('dashboard')->with('message_success', 'Berhasil memperbarui role/session sebagai '.$active_role['role']);
+    }
+
+    public function change_gudang($id_gudang)
+    {
+        $gudang = Gudang::select('id', 'nama_gudang')->find($id_gudang);
+
+        session(['active_gudang' => $gudang]); 
+
+        return redirect()->back()->with('message_success', 'Berhasil memperbarui gudang aktif');
+
     }
 
     public function forceLogout(Request $request)

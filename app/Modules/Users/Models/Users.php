@@ -22,7 +22,8 @@ class Users extends Model
     {
         return Attribute::make(
             function($value){
-				return Format::tanggal($value);
+				// return Format::tanggal($value);
+				return $value;
 			});
     }
 

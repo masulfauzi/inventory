@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Helpers\Permission;
+use App\Modules\Gudang\Models\Gudang;
+use App\Modules\UserGudang\Models\UserGudang;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
@@ -34,6 +36,9 @@ class LogSuccessfullLogin
             $roles = Permission::getRole($user->id);
             if($roles->count() == 0) $this->logout();
             $active_role = $roles->first()->only(['id', 'role']);
+            $gudang = Gudang::all()->pluck('nama_gudang', 'id');
+
+            // dd($gudang);
 
             // get user's menu
             $menus = Permission::getMenu($active_role);
@@ -44,11 +49,21 @@ class LogSuccessfullLogin
                                 return [$item['module'] => $item->only(['create', 'read', 'show', 'update', 'delete', 'show_menu'])];
                             });
 
+            // cek user_gudang
+            $user_gudang = UserGudang::where('id_user', $user->id)
+                                        ->select('g.id', 'g.nama_gudang')
+                                        ->join('gudang as g', 'user_gudang.id_gudang', '=', 'g.id')
+                                        ->first();
+
+            // dd($user_gudang);
+
             // store to session
             session(['menus' => $menus]);
             session(['roles' => $roles->pluck('role', 'id')->all()]);
             session(['privileges' => $privileges->all()]);
-            session(['active_role' => $active_role]);      
+            session(['active_role' => $active_role]);   
+            session(['active_gudang' => $user_gudang]); 
+            session(['gudang' => $gudang]);
         } catch (\Throwable $th) {
             $this->logout();
         }
