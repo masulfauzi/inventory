@@ -200,8 +200,8 @@
                             <p>{{ date('Y') }} &copy; {{ config('app.name') }}</p>
                         </div>
                         <div class="float-end">
-                            <p>Crafted with <span class=""><i class="bi bi-tornado"></i> Laralag</span> by <a
-                                    href="https://tugutech.net">Tugutech</a></p>
+                            <p>Crafted with <span class=""><i class="bi bi-tornado"></i> Inventory System</span> by <a
+                                    href="https://smkn2semarang.sch.id/">Skanida</a></p>
                         </div>
                     </div>
                 </footer>
