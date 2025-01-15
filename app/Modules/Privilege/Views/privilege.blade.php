@@ -37,7 +37,7 @@
                         </form>
                     </div>
                     <div class="col-3">  
-						{!! button('privilege.create', $title, ['id_role' => $role->id]) !!}  
+                        {!! button('privilege.create', $title, ['id_role' => $role->id]) !!}  
                     </div>
                 </div>
                 @include('include.flash')
@@ -46,12 +46,12 @@
                         <thead>
                             <tr>
                                 <th width="15">No</th>
-								<td>Menu</td>
+                                <td>Menu</td>
                                 <td class="text-center">Create</td>
-								<td class="text-center">Read</td>
-								<td class="text-center">Update</td>
-								<td class="text-center">Delete</td>
-								<td class="text-center">Show Menu</td>
+                                <td class="text-center">Read</td>
+                                <td class="text-center">Update</td>
+                                <td class="text-center">Delete</td>
+                                <td class="text-center">Show Menu</td>
                                 <th class="text-center" width="20%">Aksi</th>
                             </tr>
                         </thead>
@@ -60,14 +60,14 @@
                             @forelse ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-									<td>{{ $item->menu->menu }}</td>
+                                    <td>{{ optional($item->menu)->menu ?? 'Menu tidak tersedia' }}</td>
                                     <td class="text-center">{!! $item->create ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
-									<td class="text-center">{!! $item->read ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
-									<td class="text-center">{!! $item->update ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
-									<td class="text-center">{!! $item->delete ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
-									<td class="text-center">{!! $item->show_menu ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
+                                    <td class="text-center">{!! $item->read ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
+                                    <td class="text-center">{!! $item->update ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
+                                    <td class="text-center">{!! $item->delete ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
+                                    <td class="text-center">{!! $item->show_menu ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-ban text-danger"></i>' !!}</td>
                                     <td class="text-center">
-										{!! button('privilege.edit', $title, ['privilege' => $item->id, 'id_role' => $role->id]) !!}
+                                        {!! button('privilege.edit', $title, ['privilege' => $item->id, 'id_role' => $role->id]) !!}
                                         {!! button('privilege.destroy', $title, ['privilege' => $item->id, 'id_role' => $role->id]) !!}
                                     </td>
                                 </tr>
@@ -79,7 +79,7 @@
                         </tbody>
                     </table>
                 </div>
-				{{ $data->links() }}
+                {{ $data->links() }}
             </div>
         </div>
 
