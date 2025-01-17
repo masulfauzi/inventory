@@ -11,12 +11,17 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3>Dashboard</h3>
-                    <form class="d-flex mx-3">
-                        <input class="form-control me-2" type="search" placeholder="Cari sesuatu..." aria-label="Search">
-                        <button class="btn btn-primary" type="submit">Cari</button>
-                    </form>
+                    <div class="d-flex align-items-center">
+                        <form class="d-flex mx-3">
+                            <input class="form-control me-2" type="search" placeholder="Cari sesuatu..." aria-label="Search">
+                            <button class="btn btn-primary" type="submit">Cari</button>
+                        </form>
+                        <div class="ms-3">
+                            <img src="/assets/images/Doorbell.png" alt="Notifikasi" class="rounded-circle" width="40">
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>            
         </div>
     </div>
 </div>
