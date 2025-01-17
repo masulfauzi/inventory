@@ -1348,6 +1348,15 @@ select {
 .disabled\:opacity-25:disabled {
   opacity: 0.25;
 }
+
+#auth-right {
+  display: flex; /* Mengaktifkan Flexbox */
+  justify-content: center; /* Mengatur posisi horizontal ke tengah */
+  align-items: center; /* Mengatur posisi vertikal ke tengah */
+  /* background-color: #007bff; Latar belakang biru (sesuai Bootstrap "bg-primary") */
+  height: 100%; /* Pastikan elemen mengambil tinggi penuh */
+}
+
 @media (prefers-color-scheme: dark) {
 
   .dark\:border-gray-700 {
