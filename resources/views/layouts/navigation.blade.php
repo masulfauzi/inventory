@@ -57,6 +57,12 @@
                     </svg>
                 </button>
             </div>
+
+            <text aria-label="breadcrumb" class="breadcrumb-header">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </text>
         </div>
     </div>
 
