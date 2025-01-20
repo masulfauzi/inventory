@@ -119,8 +119,8 @@
                             @endif
                             @if (get('active_role') == 'Super Admin')
                                 <ul class="navbar-nav mb-2 mb-lg-0">
-                            @else
-                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                @else
+                                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             @endif
                             <li class="nav-item dropdown me-1">
                                 <a class="nav-link active dropdown-toggle text-gray-700 me-3" href="#"
@@ -200,8 +200,8 @@
                             <p>{{ date('Y') }} &copy; {{ config('app.name') }}</p>
                         </div>
                         <div class="float-end">
-                            <p>Crafted with <span class=""><i class="bi bi-tornado"></i> Inventory System</span> by <a
-                                    href="https://smkn2semarang.sch.id/">Skanida</a></p>
+                            <p>Crafted with <span class=""><i class="bi bi-tornado"></i> Inventory System</span>
+                                by <a href="https://smkn2semarang.sch.id/">Skanida</a></p>
                         </div>
                     </div>
                 </footer>
@@ -233,6 +233,11 @@
                 // datepicker
                 loadDatePicker('.datetimepicker');
                 loadDatePicker('.datepicker');
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.body.classList.add('theme-dark');
+                }
             });
         </script>
         @yield('page-js')
