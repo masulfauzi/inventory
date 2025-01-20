@@ -3,10 +3,9 @@
     <div class="row h-100">
         <div class="col-lg-5 col-12">
             <div id="auth-left">
-                <div class="auth-logo">
-                    <a href="/"><img src="{{ asset('assets/images/logo/logo.svg') }}" alt="Logo"></a>
-                </div>
+                
                 <h1 class="auth-title">Log in</h1>
+                <p class="auth-subtitle mb-5"></p>
                 {{-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p> --}}
 
                 <!-- Session Status -->
