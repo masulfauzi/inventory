@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('id_barang')->references('id')->on('barang')->onUpdate('cascade')->onDelete('restrict');
             $table->string('id_gudang', 36);
             $table->foreign('id_gudang')->references('id')->on('gudang')->onUpdate('cascade')->onDelete('restrict');
-            $table->integer('stok');
+            $table->bigInteger('stok');
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by', 36)->nullable();
