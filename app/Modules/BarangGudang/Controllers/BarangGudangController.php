@@ -5,12 +5,13 @@ use Form;
 use App\Helpers\Logger;
 use Illuminate\Http\Request;
 use App\Modules\Log\Models\Log;
-use App\Modules\BarangGudang\Models\BarangGudang;
-use App\Modules\Barang\Models\Barang;
-use App\Modules\Gudang\Models\Gudang;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\Barang\Models\Barang;
+
+use App\Modules\Gudang\Models\Gudang;
+use App\Modules\Transaksi\Models\Transaksi;
+use App\Modules\BarangGudang\Models\BarangGudang;
 
 class BarangGudangController extends Controller
 {
@@ -63,6 +64,19 @@ class BarangGudangController extends Controller
 			'stok' => 'required',
 			
 		]);
+		$cek_barang = BarangGudang::where('id_barang', $request->input('id_barang'))->first();
+		// dd($baranggudang);
+
+		if ($cek_barang) {
+
+		$baranggudang = BarangGudang::find($cek_barang->id);
+		$baranggudang->stok = $request->input("stok") + $baranggudang->stok;
+		
+		$baranggudang->updated_by = Auth::id();
+		$baranggudang->save();
+
+		}
+		else {
 
 		$baranggudang = new BarangGudang();
 		$baranggudang->id_gudang = $request->input("id_gudang");
@@ -72,14 +86,20 @@ class BarangGudangController extends Controller
 		$baranggudang->created_by = Auth::id();
 		$baranggudang->save();
 
+		}
+
+		
+
 		$text = 'membuat '.$this->title; //' baru '.$baranggudang->what;
-		$this->log($request, $text, ['baranggudang.id' => $baranggudang->id]);
+		// $this->log($request, $text, ['baranggudang.id' => $baranggudang->id]);
 		return redirect()->route('baranggudang.index')->with('message_success', 'Barang Gudang berhasil ditambahkan!');
 	}
+
 
 	public function show(Request $request, BarangGudang $baranggudang)
 	{
 		$data['baranggudang'] = $baranggudang;
+		$data['transaksi'] = Transaksi::where('id_barang_gudang', $baranggudang->id)->paginate(10)->withQueryString();
 
 		$text = 'melihat detail '.$this->title;//.' '.$baranggudang->what;
 		$this->log($request, $text, ['baranggudang.id' => $baranggudang->id]);

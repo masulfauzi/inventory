@@ -24,7 +24,7 @@ class TransaksiController extends Controller
 
 	public function index(Request $request)
 	{
-		$query = Transaksi::query();
+		$query = Transaksi::orderBy('tgl_transaksi', 'desc');
 		if($request->has('search')){
 			$search = $request->get('search');
 			// $query->where('name', 'like', "%$search%");

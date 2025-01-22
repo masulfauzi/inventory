@@ -52,7 +52,7 @@
 								<td>Tgl Transaksi</td>
 								{{-- <td>Bukti Transaksi</td> --}}
 								
-                                <th width="20%">Aksi</th>
+                                {{-- <th width="20%">Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -66,11 +66,11 @@
 									<td>{{ $item->tgl_transaksi }}</td>
 									{{-- <td>{{ $item->bukti_transaksi }}</td> --}}
 									
-                                    <td>
+                                    {{-- <td>
 										{!! button('transaksi.show','', $item->id) !!}
 										{!! button('transaksi.edit', $title, $item->id) !!}
                                         {!! button('transaksi.destroy', $title, $item->id) !!}
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @empty
                                 <tr>

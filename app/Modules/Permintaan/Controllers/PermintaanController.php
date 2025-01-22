@@ -70,19 +70,88 @@ class PermintaanController extends Controller
 	public function store_keranjang(Request $request)
 	{
 		$barang = BarangGudang::find($request->input('id_barang_gudang'));
+		$data_keranjang = session('keranjang');
 
-		$keranjang = [
-			'id_barang_gudang'	=> $request->input('id_barang_gudang'),
-			'permintaan'		=> $request->input('jumlah'),
-			'disetujui'		=> $request->input('jumlah'),
-			'nama_barang'	=> $barang->barang->nama_barang
-		];
-
-		session()->push('keranjang', $keranjang);
+		$data_keranjang = collect($data_keranjang);
 		
+		$cek_data = $data_keranjang->where('id_barang_gudang', $request->input('id_barang_gudang'));
+		// dd($cek_data);
 
+		if (count($cek_data) > 0) {
+			$new_keranjang = [
 
+			];
+			foreach($data_keranjang as $item_keranjang) {
+				if ($item_keranjang['id_barang_gudang'] == $request->input('id_barang_gudang')) {
+				    $data = [
+						'id_barang_gudang'	=> $request->input('id_barang_gudang'),
+						'permintaan'		=> $request->input('jumlah') + $item_keranjang['permintaan'],
+						'disetujui'		=> $request->input('jumlah') + $item_keranjang['disetujui'],
+						'nama_barang'	=> $barang->barang->nama_barang
+					];
+				}
+				else {
+					$data = [
+						'id_barang_gudang'	=> $item_keranjang['id_barang_gudang'],
+						'permintaan'		=> $item_keranjang['permintaan'],
+						'disetujui'		=> $item_keranjang['disetujui'],
+						'nama_barang'	=> $item_keranjang['nama_barang'],
+					];
+				}
+				array_push($new_keranjang, $data);
+			}
+			session(['keranjang' => $new_keranjang]);
+		}
+		else {
+			$keranjang = [
+				'id_barang_gudang'	=> $request->input('id_barang_gudang'),
+				'permintaan'		=> $request->input('jumlah'),
+				'disetujui'		=> $request->input('jumlah'),
+				'nama_barang'	=> $barang->barang->nama_barang
+			];
+	
+			session()->push('keranjang', $keranjang);
+		}
 		return redirect()->back()->with('message_success', 'Data berhasil disimpan di keranjang.');
+	}
+
+	public function hapus_keranjang(Request $request, $id) {
+		$keranjang = session('keranjang');
+		$keranjang = collect($keranjang);
+		$cek_data = $keranjang->where('id_barang_gudang', $id);
+		// dd($cek_data);
+		$new_keranjang = [
+
+		];
+		foreach($keranjang as $item_keranjang) {
+			if ($item_keranjang['id_barang_gudang'] == $id) {
+				
+			}
+			else {
+				$data = [
+					'id_barang_gudang'	=> $item_keranjang['id_barang_gudang'],
+					'permintaan'		=> $item_keranjang['permintaan'],
+					'disetujui'		=> $item_keranjang['disetujui'],
+					'nama_barang'	=> $item_keranjang['nama_barang'],
+				];
+				array_push($new_keranjang, $data);
+			}
+		}
+		session(['keranjang' => $new_keranjang]);
+		return redirect()->back()->with('message_success', 'Data berhasil dihapus.');
+	}
+
+	public function detail_permintaan(Request $request, Permintaan $permintaan) {
+		$data['permintaan'] = $permintaan;
+		$data['barang_permintaan'] = BarangPermintaan::select('barang_permintaan.*', 'bg.stok')
+										->join('barang_gudang as bg', 'barang_permintaan.id_barang_gudang', '=', 'bg.id')
+										->whereIdPermintaan($permintaan->id)->get();
+		// dd($data);
+
+
+		$text = 'melihat detail '.$this->title;//.' '.$permintaan->what;
+		$this->log($request, $text, ['permintaan.id' => $permintaan->id]);
+		return view('Permintaan::permintaan_detail_user', array_merge($data, ['title' => $this->title]));
 	}
 
 	function store(Request $request)
@@ -191,6 +260,47 @@ class PermintaanController extends Controller
 		return redirect()->back()->with('message_success', 'Data Berhasil Disimpan');
 	}
 
+	public function selesaikan_permintaan(Request $request)
+	{
+		for($i=0; $i<count($request->id_barang_permintaan); $i++)
+		{
+			$barang = BarangPermintaan::find($request->id_barang_permintaan[$i]);
+
+			$barang->disetujui = $request->disetujui[$i];
+			$barang->save();
+
+			$barang_gudang = BarangGudang::find($barang->id_barang_gudang);
+
+			$barang_gudang->stok -= $barang->disetujui;
+			$barang_gudang->save();
+
+
+			// dd($barang_gudang);
+
+			$transaksi = new Transaksi();
+
+			$transaksi->id_barang_gudang = $barang->id_barang_gudang;
+			$transaksi->keluar = $barang->disetujui;
+			$transaksi->tgl_transaksi = date('Y-m-d');
+			$transaksi->created_at = date('Y-m-d H:i:s');
+			$transaksi->created_by = Auth::user()->id;
+			$transaksi->save();
+
+			
+
+
+			// dd($transaksi);
+		}
+
+		$status = Status::whereStatusPermintaan('Selesai')->first();
+
+		$permintaan = Permintaan::find($request->id_permintaan);
+		$permintaan->id_status = $status->id;
+		$permintaan->save();
+
+		return redirect()->back()->with('message_success', 'Pesanan Berhasil Diselesaikan');
+	}
+	
 	public function edit(Request $request, Permintaan $permintaan)
 	{
 		$data['permintaan'] = $permintaan;

@@ -61,9 +61,7 @@
 									<td>{{ \App\Helpers\Format::tanggal($item->created_at, false,false) }}</td>
 									
                                     <td>
-										{!! button('permintaan.show','', $item->id) !!}
-										{!! button('permintaan.edit', $title, $item->id) !!}
-                                        {!! button('permintaan.destroy', $title, $item->id) !!}
+										<a href="{{ route('permintaan.detail.show', $item->id) }}">Detail</a>
                                     </td>
                                 </tr>
                             @empty
