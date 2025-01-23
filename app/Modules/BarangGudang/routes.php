@@ -6,7 +6,7 @@ use App\Modules\BarangGudang\Controllers\BarangGudangController;
 
 Route::controller(BarangGudangController::class)->middleware(['web','auth'])->name('baranggudang.')->group(function(){
 	Route::get('/baranggudang/transaksi', 'transaksi')->name('transaksi.show');
-
+	Route::get('/baranggudang/laporan', 'laporan_barang')->name('laporan.show');
 	
 	Route::get('/baranggudang', 'index')->name('index');
 	Route::get('/baranggudang/data', 'data')->name('data.index');

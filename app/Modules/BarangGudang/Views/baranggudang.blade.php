@@ -28,7 +28,7 @@
             </h6>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-6">
                         <form action="{{ route('baranggudang.index') }}" method="get">
                             <div class="form-group col-md-3 has-icon-left position-relative">
                                 <input type="text" class="form-control" value="{{ request()->get('search') }}" name="search" placeholder="Search">
@@ -38,6 +38,9 @@
                     </div>
                     <div class="col-3">  
 						{!! button('baranggudang.create', $title) !!}  
+                    </div>
+                    <div class="col-3">  
+						{!! button('baranggudang.laporan.show', 'Download PDF') !!}  
                     </div>
                 </div>
                 @include('include.flash')

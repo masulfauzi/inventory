@@ -12,6 +12,7 @@ use App\Modules\Barang\Models\Barang;
 use App\Modules\Gudang\Models\Gudang;
 use App\Modules\Transaksi\Models\Transaksi;
 use App\Modules\BarangGudang\Models\BarangGudang;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BarangGudangController extends Controller
 {
@@ -35,6 +36,18 @@ class BarangGudangController extends Controller
 
 		$this->log($request, 'melihat halaman manajemen data '.$this->title);
 		return view('BarangGudang::baranggudang', array_merge($data, ['title' => $this->title]));
+	}
+
+	public function laporan_barang(Request $request) 
+	{
+		$query = BarangGudang::query();
+		$data['data'] = $query->paginate(10)->withQueryString();
+
+
+		$this->log($request, 'melihat halaman manajemen data '.$this->title);
+		// return view('', array_merge($data, ['title' => $this->title]));
+		$pdf = Pdf::loadView('BarangGudang::laporan_barang', $data);
+    return $pdf->download('invoice.pdf');
 	}
 
 	public function create(Request $request)
