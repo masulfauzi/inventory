@@ -8,7 +8,9 @@ Route::controller(PermintaanController::class)->middleware(['web','auth'])->name
 	Route::post('/permintaan/keranjang', 'store_keranjang')->name('keranjang.store');
 	Route::get('/permintaan/permintaan_user', 'permintaan_user')->name('user.index');
 	Route::post('/permintaan/setujui', 'setujui_permintaan')->name('setujui.store');
-	
+	Route::get('/permintaan/hapus_keranjang/{permintaan}', 'hapus_keranjang')->name('hapus_keranjang.store');
+	Route::get('/permintaan/detail/{permintaan}', 'detail_permintaan')->name('detail.show');
+	Route::post('/permintaan/selesai', 'selesaikan_permintaan')->name('selesai.store');
 	
 	Route::get('/permintaan', 'index')->name('index');
 	Route::get('/permintaan/data', 'data')->name('data.index');

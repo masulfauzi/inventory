@@ -76,7 +76,7 @@
                                         <td>{{ $keranjang[$i]['nama_barang'] }}</td>
                                         <td>{{ $keranjang[$i]['permintaan'] }}</td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-danger">Hapus</a>
+                                            <a href="{{ route('permintaan.hapus_keranjang.store', $keranjang[$i]['id_barang_gudang']) }}" class="btn btn-sm btn-danger">Hapus</a>
                                         </td>
                                     </tr>
                                 @endfor

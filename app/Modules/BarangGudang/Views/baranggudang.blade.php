@@ -64,8 +64,8 @@
 									
                                     <td>
 										{!! button('baranggudang.show','', $item->id) !!}
-										{!! button('baranggudang.edit', $title, $item->id) !!}
-                                        {!! button('baranggudang.destroy', $title, $item->id) !!}
+										{{-- {!! button('baranggudang.edit', $title, $item->id) !!} --}}
+                                        {{-- {!! button('baranggudang.destroy', $title, $item->id) !!} --}}
                                     </td>
                                 </tr>
                             @empty

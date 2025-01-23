@@ -8,7 +8,7 @@
         <div class="page-title">
             <div class="row mb-2">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <a href="{{ route('permintaan.index') }}" class="btn btn-sm icon icon-left btn-outline-secondary"><i
+                    <a href="{{ route('permintaan.user.index') }}" class="btn btn-sm icon icon-left btn-outline-secondary"><i
                             class="fa fa-arrow-left"></i> Kembali </a>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
@@ -69,6 +69,75 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
+                                @if ($permintaan->status->status_permintaan == 'Siap Diambil')
+
+                                <form action="{{ route('permintaan.selesai.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id_permintaan" value="{{ $permintaan->id }}">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Barang</th>
+                                                <th>Jumlah Permintaan</th>
+                                                <th>Jumlah Stok</th>
+                                                <th width="20%">Jumlah Diberikan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($barang_permintaan as $item)
+                                            <input type="hidden" name="id_barang_permintaan[]" value="{{ $item->id }}">
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $item->barangGudang->barang->nama_barang }}</td>
+                                                    <td>{{ $item->permintaan }}</td>
+                                                    <td>{{ $item->stok }}</td>
+                                                    <td><input type="number" name="disetujui[]" class="form-control" value="{{ $item->disetujui }}" max="{{ $item->stok }}" min="0"></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" class="btn btn-success">Selesai</button>
+                                </form>
+
+                                @elseif ($permintaan->status->status_permintaan == 'Selesai')
+
+                                <form action="{{ route('permintaan.selesai.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id_permintaan" value="{{ $permintaan->id }}">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Barang</th>
+                                                <th>Jumlah Permintaan</th>
+                                                <th>Jumlah Stok</th>
+                                                <th width="20%">Jumlah Diberikan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($barang_permintaan as $item)
+                                            <input type="hidden" name="id_barang_permintaan[]" value="{{ $item->id }}">
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $item->barangGudang->barang->nama_barang }}</td>
+                                                    <td>{{ $item->permintaan }}</td>
+                                                    <td>{{ $item->stok }}</td>
+                                                    <td><input type="number" name="disetujui[]" class="form-control" value="{{ $item->disetujui }}" max="{{ $item->stok }}" min="0"></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </form>
+                                    
+                                @else
+
                                 <form action="{{ route('permintaan.setujui.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id_permintaan" value="{{ $permintaan->id }}">
@@ -100,7 +169,9 @@
                                     </table>
                                     <button type="submit" class="btn btn-success">Simpan Data</button>
                                 </form>
-
+                                    
+                                @endif
+                                
                             </div>
                         </div>
                     </div>

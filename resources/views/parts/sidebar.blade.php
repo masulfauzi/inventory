@@ -36,10 +36,6 @@
             @endforeach
         @endforeach
 
-        <li class="sidebar-title">
-            <h6>Laporan</h6>
-        </li>
-        <hr>
         @foreach ($menus->where('parent_id', null)->where('level', 'laporan') as $laporan)
             <li class="sidebar-item">
                 <a href="{{ route($laporan->routing) }}" class='sidebar-link'>
@@ -48,10 +44,6 @@
             </li>
         @endforeach
 
-		<li class="sidebar-title">
-            <h6>Pengaturan</h6>
-        </li>
-        <hr>
         @foreach ($menus->where('parent_id', null)->where('level', 'laporan') as $laporan)
             <li class="sidebar-item">
                 <a href="{{ route($laporan->routing) }}" class='sidebar-link'>
