@@ -31,7 +31,7 @@
     @include('include.flash')
     <section class="row">
         <div class="row mb-4">
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-body d-flex align-items-center">
                         <div class="me-3">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-body d-flex align-items-center">
                         <div class="me-3">
@@ -57,24 +57,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-body d-flex align-items-center">
                         <div class="me-3">
                             <img src="{{ asset('assets/images/barang keluar.png') }}" alt="Barang Keluar" width="50">
-                        </div>
-                        <div>
-                            <h6 class="text-muted">Data Permintaan Siap Ambil</h6>
-                            <h2>{{ count($permintaan->where('status_permintaan', 'Siap Diambil')) }}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="me-3">
-                            <img src="{{ asset('assets/images/trolley.png') }}" alt="Data Barang" width="50">
                         </div>
                         <div>
                             <h6 class="text-muted">Data Permintaan Total</h6>
