@@ -63,9 +63,20 @@
 									<td>{{ $item->no_telp }}</td>
 									
                                     <td>
-										{!! button('gudang.show','', $item->id) !!}
-										{!! button('gudang.edit', $title, $item->id) !!}
-                                        {!! button('gudang.destroy', $title, $item->id) !!}
+										<a href="{{ route('gudang.show', $item->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('gudang.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+                                        <form action="{{ route('gudang.destroy', $item->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        
                                     </td>
                                 </tr>
                             @empty

@@ -59,9 +59,20 @@
                                     <td>{{ $item->kategori }}</td>
 									
                                     <td>
-										{!! button('kategori.show','', $item->id) !!}
-										{!! button('kategori.edit', $title, $item->id) !!}
-                                        {!! button('kategori.destroy', $title, $item->id) !!}
+										<a href="{{ route('kategori.show', $item->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('kategori.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+                                        <form action="{{ route('kategori.destroy', $item->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        
                                     </td>
                                 </tr>
                             @empty
