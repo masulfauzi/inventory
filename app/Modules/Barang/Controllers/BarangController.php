@@ -45,6 +45,8 @@ class BarangController extends Controller
 		
 		$data['forms'] = array(
 			'nama_barang' => ['Nama Barang', Form::text("nama_barang", old("nama_barang"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
+			'kode_barang' => ['Kode Barang', Form::text("kode_barang", old("kode_barang"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
+			'merk' => ['Merk Barang', Form::text("merk", old("merk"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
 			'id_kategori' => ['Kategori', Form::select("id_kategori", $ref_kategori, null, ["class" => "form-control select2"]) ],
 			'id_satuan' => ['Satuan', Form::select("id_satuan", $ref_satuan, null, ["class" => "form-control select2"]) ],
 			
@@ -60,13 +62,16 @@ class BarangController extends Controller
 			'id_kategori' => 'required',
 			'id_satuan' => 'required',
 			'nama_barang' => 'required',
-			
+			'kode_barang' => 'required',
+			'merk' => 'required',
 		]);
 
 		$barang = new Barang();
 		$barang->id_kategori = $request->input("id_kategori");
 		$barang->id_satuan = $request->input("id_satuan");
 		$barang->nama_barang = $request->input("nama_barang");
+		$barang->kode_barang = $request->input("kode_barang");
+		$barang->merk = $request->input("merk");
 		
 		$barang->created_by = Auth::id();
 		$barang->save();
@@ -92,11 +97,21 @@ class BarangController extends Controller
 		$ref_kategori = Kategori::all()->pluck('kategori','id');
 		$ref_satuan = Satuan::all()->pluck('satuan','id');
 		
+		// $data['forms'] = array(
+		// 	'nama_barang' => ['Nama Barang', Form::text("nama_barang", old("nama_barang"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
+		// 	'kode_barang' => ['Kode Barang', Form::text("kode_barang", old("kode_barang"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
+		// 	'merk' => ['Merk Barang', Form::text("merk", old("merk"), ["class" => "form-control","placeholder" => "", "required" => "required"]) ],
+		// 	'id_kategori' => ['Kategori', Form::select("id_kategori", $ref_kategori, null, ["class" => "form-control select2"]) ],
+		// 	'id_satuan' => ['Satuan', Form::select("id_satuan", $ref_satuan, null, ["class" => "form-control select2"]) ],
+			
+		// );
+		
 		$data['forms'] = array(
 			'id_kategori' => ['Kategori', Form::select("id_kategori", $ref_kategori, null, ["class" => "form-control select2"]) ],
 			'id_satuan' => ['Satuan', Form::select("id_satuan", $ref_satuan, null, ["class" => "form-control select2"]) ],
 			'nama_barang' => ['Nama Barang', Form::text("nama_barang", $barang->nama_barang, ["class" => "form-control","placeholder" => "", "required" => "required", "id" => "nama_barang"]) ],
-			
+			'kode_barang' => ['Kode Barang', Form::text("kode_barang", $barang->kode_barang, ["class" => "form-control","placeholder" => "", "required" => "required", "id" => "kode_barang"]) ],
+			'merk' => ['Merk Barang', Form::text("merk", $barang->merk, ["class" => "form-control","placeholder" => "", "required" => "required", "id" => "merk"]) ],
 		);
 
 		$text = 'membuka form edit '.$this->title;//.' '.$barang->what;
@@ -110,6 +125,8 @@ class BarangController extends Controller
 			'id_kategori' => 'required',
 			'id_satuan' => 'required',
 			'nama_barang' => 'required',
+			'kode_barang' => 'required',
+			'merk' => 'required',
 			
 		]);
 		
@@ -117,6 +134,8 @@ class BarangController extends Controller
 		$barang->id_kategori = $request->input("id_kategori");
 		$barang->id_satuan = $request->input("id_satuan");
 		$barang->nama_barang = $request->input("nama_barang");
+		$barang->kode_barang = $request->input("kode_barang");
+		$barang->merk = $request->input("merk");
 		
 		$barang->updated_by = Auth::id();
 		$barang->save();

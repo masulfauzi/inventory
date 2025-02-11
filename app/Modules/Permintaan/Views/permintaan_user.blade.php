@@ -48,6 +48,7 @@
                                 <th width="15">No</th>
                                 <td>Status</td>
 								<td>User</td>
+                                <td>Tanggal</td>
 								
                                 <th width="20%">Aksi</th>
                             </tr>
@@ -59,7 +60,8 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $item->status->status_permintaan }}</td>
 									<td>{{ $item->users->name }}</td>
-									
+									<td>{{ \App\Helpers\Format::tanggal($item->created_at) }}</td>
+
                                     <td>
 										{{-- {!! button('permintaan.show','', $item->id) !!}
 										{!! button('permintaan.edit', $title, $item->id) !!}

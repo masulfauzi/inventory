@@ -51,14 +51,14 @@
                     </div>
                     <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
                 </form>
-                <div class="text-center mt-5 text-lg fs-4">
+                {{-- <div class="text-center mt-5 text-lg fs-4">
                     <p class="text-gray-600">Don't have an account? <a href="{{ route('register') }}" class="font-bold">Sign
                             up</a>.</p>
                     @if (Route::has('password.request'))
                         <p><a class="font-bold"
                                 href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>.</p>
                     @endif
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="col-lg-7 d-none d-lg-block">
