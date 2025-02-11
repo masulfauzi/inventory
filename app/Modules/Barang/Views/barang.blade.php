@@ -46,7 +46,9 @@
                         <thead>
                             <tr>
                                 <th width="15">No</th>
+                                <td>Kode Barang</td>
 								<td>Nama Barang</td>
+                                <td>Merk</td>
                                 <td>Kategori</td>
 								<td>Satuan</td>
 								
@@ -58,7 +60,9 @@
                             @forelse ($data as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $item->kode_barang }}</td>
 									<td>{{ $item->nama_barang }}</td>
+                                    <td>{{ $item->merk }}</td>
                                     <td>{{ $item->kategori->kategori }}</td>
 									<td>{{ $item->satuan->satuan }}</td>
 									

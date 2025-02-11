@@ -85,13 +85,6 @@
 									<td>{{ $item->masuk }}</td>
 									<td>{{ $item->keluar }}</td>
 									<td>{{ $item->tgl_transaksi }}</td>
-									{{-- <td>{{ $item->bukti_transaksi }}</td> --}}
-									
-                                    {{-- <td>
-										{!! button('transaksi.show','', $item->id) !!}
-										{!! button('transaksi.edit', $title, $item->id) !!}
-                                        {!! button('transaksi.destroy', $title, $item->id) !!}
-                                    </td> --}}
                                 </tr>
                             @empty
                                 <tr>
@@ -100,6 +93,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <a href="{{ route('baranggudang.laporan.transaksi.show', $baranggudang->id) }}">Download PDF</a>
                 </div>
 				{{ $transaksi->links() }}
             </div>

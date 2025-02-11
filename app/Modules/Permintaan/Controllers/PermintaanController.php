@@ -194,7 +194,7 @@ class PermintaanController extends Controller
 
 	public function permintaan_user(Request $request)
 	{
-		$query = Permintaan::query();
+		$query = Permintaan::orderBy('created_at', 'desc');
 		if($request->has('search')){
 			$search = $request->get('search');
 			// $query->where('name', 'like', "%$search%");

@@ -119,6 +119,19 @@ class BarangGudangController extends Controller
 		return view('BarangGudang::baranggudang_detail', array_merge($data, ['title' => $this->title]));
 	}
 
+	public function laporan_transaksi(Request $request, BarangGudang $baranggudang) 
+	{
+		// $query = Transaksi::query();
+		// $data['laporan'] = $query->paginate(10)->withQueryString();
+
+		$data['baranggudang'] = $baranggudang;
+		$data['laporan'] = Transaksi::where('id_barang_gudang', $baranggudang->id)->get();
+		$this->log($request, 'melihat laporan '.$this->title);
+		// return view('BarangGudang::laporan_transaksi', array_merge($data, ['title' => $this->title]));
+		$pdf = Pdf::loadView('BarangGudang::laporan_transaksi', $data);
+    	return $pdf->download('invoice.pdf');
+	}
+
 	public function edit(Request $request, BarangGudang $baranggudang)
 	{
 		$data['baranggudang'] = $baranggudang;
